@@ -45,6 +45,21 @@ function addStep(stepData, id) {
     })
 }
 
-function update() {}
+function update(changes, id) {
+  const schemeId = id
+  return db('schemes')
+    .where('id', id)
+    .update(changes)
+    .then(() => {
+      return db('schemes').where('id', schemeId).first()
+    })
+}
 
-function remove() {}
+function remove(id) {
+  return db('schemes')
+    .where('id', id)
+    .del()
+    .then(() => {
+      return db('schemes')
+    })
+}
